@@ -29,6 +29,26 @@
     .directorate-line{display:block;margin-top:1mm}.empty-editor .btn{margin-top:20px}.q-unit.answer-line{height:8mm;margin:0}input[readonly]{background:#f0f4ed;color:#7b907d;cursor:default}
     @page{size:A4 portrait;margin:0}
     @media print{html,body{background:#fff!important;margin:0!important;padding:0!important;width:210mm}#app,.icons,.dialog,.toast,.measurement-root{display:none!important}#print-root{display:block!important;margin:0!important;padding:0!important}.exam-page{margin:0!important;box-shadow:none!important;transform:none!important;break-after:page;page-break-after:always;break-inside:avoid;page-break-inside:avoid}.exam-page:last-child{break-after:auto;page-break-after:auto}}
+.premium-upgrade-dialog{max-width:460px;width:calc(100vw - 32px);max-height:calc(100dvh - 32px);padding:0;border:1px solid #dbe5da;border-radius:20px;overflow-y:auto;background:#fff;box-shadow:0 24px 100px #10251c40}
+.premium-upgrade-dialog::backdrop{background:#183a30b8;backdrop-filter:blur(4px)}
+.premium-upgrade-hero{position:relative;padding:29px 28px 24px;background:linear-gradient(135deg,#f1f6ec,#e5f0e9);border-bottom:1px solid #dce7d9}
+.premium-upgrade-close{position:absolute;top:12px;left:12px;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;color:#688477;background:#ffffffa6}.premium-upgrade-close:hover{background:#fff;color:var(--green)}
+.premium-upgrade-close svg{width:17px;height:17px}
+.premium-upgrade-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border:1px solid #d9e2cb;border-radius:7px;background:#fbfced;color:#6d783c;font-size:10px;font-weight:700;margin-bottom:15px}
+.premium-upgrade-badge svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.premium-upgrade-dialog h2{font-size:24px;line-height:1.5;margin:0 0 9px;color:var(--green-dark)}
+.premium-upgrade-dialog .premium-upgrade-description{font-size:12px;line-height:2;margin:0;color:#66816f}
+.premium-upgrade-content{padding:23px 28px 25px}
+.premium-upgrade-features{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:12px}
+.premium-upgrade-features li{display:flex;align-items:flex-start;gap:9px;font-size:12px;line-height:1.9;color:#536d5d}
+.premium-upgrade-features svg{flex:none;width:18px;height:18px;margin-top:3px;padding:3px;border-radius:50%;background:#edf4e9;color:#507858;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.premium-upgrade-link{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:13px 12px;border-radius:10px;background:var(--green);color:#fff;text-decoration:none;font-weight:700;font-size:12px;line-height:1.7}
+.premium-upgrade-link:hover{background:var(--green-dark)}.premium-upgrade-link svg{width:19px;height:19px;fill:currentColor;flex:none}
+.premium-upgrade-dialog .premium-upgrade-account{margin:9px 0 16px;font-size:11px;line-height:1.6;text-align:center;color:#8a9b8c;direction:ltr}
+.premium-upgrade-later{display:block;width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#748478;font-size:11px}.premium-upgrade-later:hover{background:#f6f8f3;color:var(--green)}
+@media(max-width:420px){.premium-upgrade-hero{padding:25px 21px 21px}.premium-upgrade-content{padding:20px 21px 22px}.premium-upgrade-dialog h2{font-size:22px}}
+@media print{.premium-upgrade-dialog,.premium-upgrade-dialog::backdrop{display:none!important}}
+
   </style>
 <!-- Embedded font notices (SIL Open Font License):
 Copyright 2010-2022 The Amiri Project Authors (https://github.com/aliftype/amiri).
@@ -340,6 +360,40 @@ This Font Software is licensed under the SIL Open Font License, Version 1.1. Thi
     if(!storageAvailable)setStatus('الحفظ التلقائي غير متاح',true);
     fontPromise.then(()=>document.fonts.ready).then(()=>{renderPreview();if(!storageAvailable)toast('تعذّر الحفظ التلقائي. استخدم «حفظ ملف الأسئلة» للاحتفاظ بعملك.');});
   })();
+  </script>
+  <dialog class="dialog premium-upgrade-dialog" id="premiumUpgradeDialog" aria-labelledby="premiumUpgradeTitle" aria-describedby="premiumUpgradeDescription">
+    <div class="premium-upgrade-hero">
+      <button class="premium-upgrade-close" type="button" id="closePremiumUpgrade" aria-label="إغلاق نافذة الاشتراك"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      <span class="premium-upgrade-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.6 4.5 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg>ورقة المميزة — تحديث جديد</span>
+      <h2 id="premiumUpgradeTitle">طوّر أوراق أسئلتك</h2>
+      <p class="premium-upgrade-description" id="premiumUpgradeDescription">اشترك في النسخة المميزة الجديدة، واستفد من أدوات الإنكليزي والرياضيات وتنسيقات إضافية لورقتك.</p>
+    </div>
+    <div class="premium-upgrade-content">
+      <ul class="premium-upgrade-features">
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg><span>أسئلة إنكليزية باتجاه من اليسار إلى اليمين</span></li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg><span>معادلات رياضية: كسور، جذور وأسُس</span></li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg><span>أسئلة فراغات مع تعديل عرض الفراغ</span></li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg><span>أشكال جديدة لحدود الصفحة وتخصيص بيانات المدرّس</span></li>
+      </ul>
+      <a class="premium-upgrade-link" href="https://t.me/Ayman_donia" target="_blank" rel="noopener noreferrer" aria-label="طلب الاشتراك عبر تيليغرام (يفتح في علامة تبويب جديدة)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.44 3.14a1.1 1.1 0 0 0-1.14-.16L2.58 9.85c-.98.38-.94 1.04-.15 1.29l4.55 1.42 1.73 5.34c.2.61.36.84.73.84.35 0 .5-.16.7-.35l2.19-2.13 4.54 3.36c.84.47 1.44.23 1.65-.78l2.99-14.12c.14-.66.06-1.11-.07-1.58ZM9.55 12.3l8.86-5.59c.44-.27.85-.12.52.18l-7.31 6.6-.29 3.09-1.78-4.28Z"/></svg>اطلب الاشتراك عبر تيليغرام</a>
+      <p class="premium-upgrade-account">@Ayman_donia</p>
+      <button class="premium-upgrade-later" type="button" id="laterPremiumUpgrade">متابعة بالنسخة الحالية</button>
+    </div>
+  </dialog>
+
+  <script id="waraqa-premium-upgrade">
+'use strict';
+(()=>{
+  const dialog=document.getElementById('premiumUpgradeDialog');
+  function showUpgrade(){if(!dialog.open&&typeof dialog.showModal==='function')dialog.showModal();}
+  function closeUpgrade(){if(dialog.open)dialog.close();}
+  document.getElementById('closePremiumUpgrade').addEventListener('click',closeUpgrade);
+  document.getElementById('laterPremiumUpgrade').addEventListener('click',closeUpgrade);
+  window.addEventListener('pageshow',showUpgrade);
+  window.addEventListener('beforeprint',closeUpgrade);
+  showUpgrade();
+})();
+
   </script>
 </body>
 </html>
